@@ -1,4 +1,5 @@
 import Notes from './Notes.client';
+import { Metadata } from 'next';
 
 import {
   QueryClient,
@@ -17,7 +18,10 @@ interface NotesProps {
   }>;
 }
 
-export async function generateMetadata({ params, searchParams }: NotesProps) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: NotesProps): Promise<Metadata> {
   const { slug } = await params;
   const { search = '', page = '1' } = await searchParams;
   return {

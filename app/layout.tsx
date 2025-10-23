@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Note creation app',
     description:
       'A simple Next.js notes application with filtering, categories, and modal note details. Built with React, TanStack Query, and App Router.',
-    url: '08-zustand-silk-ten.vercel.app/',
+    url: 'https://08-zustand-silk-ten.vercel.app/',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
