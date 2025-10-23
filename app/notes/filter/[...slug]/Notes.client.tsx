@@ -9,10 +9,11 @@ import type { FetchNotesResponse } from '@/lib/api';
 import NoteList from '@/components/NoteList/NoteList';
 import css from './Notes.module.css';
 import Pagination from '@/components/Pagination/Pagination';
-import Modal from '@/components/Modal/Modal';
+
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Loader from '@/components/Loader/Loader';
-import NoteForm from '@/components/NoteForm/NoteForm';
+
+import Link from 'next/link';
 
 interface NotesProps {
   initialSearch: string;
@@ -23,7 +24,7 @@ interface NotesProps {
 function Notes({ initialSearch, initialPage, tag }: NotesProps) {
   const [search, setSearch] = useState<string>(initialSearch);
   const [page, setPage] = useState<number>(initialPage);
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
   const { data, isLoading } = useQuery<FetchNotesResponse>({
     queryKey: tag
       ? ['noteList', search, page, tag]
@@ -47,9 +48,6 @@ function Notes({ initialSearch, initialPage, tag }: NotesProps) {
     }
   }, 400);
 
-  const closeModal = () => setModalIsOpen(false);
-  const openModal = () => setModalIsOpen(true);
-
   return (
     <>
       <div className={css.app}>
@@ -63,14 +61,9 @@ function Notes({ initialSearch, initialPage, tag }: NotesProps) {
               forcePage={page - 1}
             />
           )}
-          <button className={css.button} onClick={openModal}>
+          <Link className={css.button} href="/notes/action/create">
             Create note +
-          </button>
-          {modalIsOpen && (
-            <Modal onClose={closeModal}>
-              <NoteForm modalClose={closeModal} />
-            </Modal>
-          )}
+          </Link>
         </header>
         {isLoading && <Loader />}
         <Toaster />

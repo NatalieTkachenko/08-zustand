@@ -17,6 +17,28 @@ interface NotesProps {
   }>;
 }
 
+export async function generateMetadata({ params, searchParams }: NotesProps) {
+  const { slug } = await params;
+  const { search = '', page = '1' } = await searchParams;
+  return {
+    title: `${slug[0]} Notes`,
+    description: `Notes: category ${slug[0]}, page ${page}, keyword ${search}`,
+    openGraph: {
+      title: `${slug[0]} Notes`,
+      description: `Notes: category ${slug[0]}, page ${page}, keyword ${search}`,
+      url: `08-zustand-silk-ten.vercel.app/notes/filter/${slug[0]}`,
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'NoteHub logo',
+        },
+      ],
+    },
+  };
+}
+
 export default async function NotesPage({ searchParams, params }: NotesProps) {
   const queryClient = new QueryClient();
 

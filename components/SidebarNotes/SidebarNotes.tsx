@@ -36,6 +36,11 @@ export default function SidebarNotes() {
             Todo notes
           </Link>
         </li>
+        <li className={css.menuItem}>
+          <Link href={`/notes/action/create`} className={css.menuLink}>
+            Create Note
+          </Link>
+        </li>
       </ul>
     </>
   );
